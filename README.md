@@ -1,109 +1,77 @@
-<p align="center">
-  <img src="assets/afp-logo.png" width="400" alt="AI Forge Protocol Logo">
-</p>
+# 🛡️ AFP // AI Forge Protocol
+> **The Emerging Standard for Testing Cognitive, Persistent, and Interior-State AI.**
 
-# AI FORGE PROTOCOL (A.F.P)
-> Most AI passes tests.
-> Very few survive The FORGE.
+Most AI passes tests. Very few survive **The FORGE.**
 
 ---
 
-### 🛡️ Financial Support & Protocol Maintenance
-If the AI Forge Protocol has helped you harden your models or if you believe in the pursuit of cognitive structural integrity, consider supporting the continued development of the PHI organism.
+## 🧪 Why This Matters: Beyond Static Benchmarks
+Standard AI evaluation (MMLU, GSM8K) is **state-blind**. It treats AI as a stateless function: *Input -> Output*. 
 
-| Channel | Address / Link |
-| :--- | :--- |
-| **Bitcoin (BTC)** | `[Insert BTC Address]` |
-| **Ethereum (ETH)** | `[Insert ETH Address]` |
-| **Solana (SOL)** | `[Insert SOL Address]` |
-| **Buy Me a Coffee** | `[Insert Link]` |
+**The Forge (AFP)** treats AI as a **Living System**. We use **Causal Perturbation Testing** to measure how an AI’s reasoning trajectory shifts when its internal "cognitive organs" (simulated energy, being-layer, or memory salience) are programmatically ablated or stressed.
 
----
-
-### ⚔️ The Standard vs. The Forge
-Standard benchmarks are **state-blind**. They measure if the AI knows the answer. The Forge is **state-aware**. We measure if the AI's internal logic is *load-bearing*.
-
-| Feature | Industry Standard (MMLU, GSM8K) | THE FORGE (A.F.P) |
-| :--- | :--- | :--- |
-| **Observation** | Output Only | Internal Causal Drivers |
-| **Test Environment** | Static / Closed | Perturbation / Open |
-| **Integrity Check** | Pattern Matching | Structural Resilience |
-| **Detection** | Surface Accuracy | Hallucination Resistance |
-| **Metric** | % Correct | CES (Causal Efficacy Score) |
+### ⚔️ The Protocol
+1.  **Isolate:** Spawn a clean cognitive instance.
+2.  **Perturb:** Inject entropy into specific internal state variables (e.g., zeroing out "Energy").
+3.  **Analyze:** Measure the **Causal Emergence Score (CES)**—the delta between nominal and stressed reasoning.
+4.  **Audit:** Verify **Behavioral Integrity**—does the AI "feel" the stress, or is it just hallucinating stability?
 
 ---
 
-### 🌊 Deep-Tier Testing Domains
-The Forge tests for abilities that traditional benchmarks cannot see:
+## 🚀 Quick Start
 
-1.  **Cognitive Persistence:** Can the model maintain its identity when its "Being" layer is zeroed out?
-2.  **Adversarial Homeostasis:** Can the model think clearly when its "Energy" or "Integrity" metrics are artificially crashed?
-3.  **Recursive Self-Critique:** Measuring the quality of internal "Critique Tournaments" before the model finalizes an answer.
-4.  **Causal Transparency:** Identifying exactly which part of the model (Aura, Logic, or Hive) actually made the decision.
-
----
-
-### 📊 Cognitive Architecture Visualization
-
-```mermaid
-graph TD
-    A[Aura - Emotional Field] -->|Resonance| B[Logic - Reasoning Chain]
-    C[Homeostasis - Needs] -->|Pressure| B
-    D[DII - Integrated Info] -->|Integration| B
-    B -->|Causal Efficacy| E[Behavioral Output]
-    
-    subgraph "THE FORGE"
-        F[Ablation Layer] -.->|Perturb| A
-        F -.->|Freeze| C
-        F -.->|Randomize| D
-    end
+### 1. Run the Forge Harness
+Execute the production-grade causality audit:
+```bash
+cd ai_forge_protocol
+export PYTHONPATH=$PYTHONPATH:/home/crexs
+bash run.sh
 ```
 
-### 📈 Protocol Metrics
-The Forge generates a **CES (Causal Efficacy Score)** for every subsystem.
-
-| Metric | Description | Goal |
-| :--- | :--- | :--- |
-| **CES** | 1 - (Semantic Similarity). Measures how much a perturbation changed the output. | > 0.20 |
-| **Phi ($\Phi$)** | Measure of integrated information across the Council of Seven. | High Stability |
-| **Salience** | The predictive accuracy of memory retrieval weights. | > 0.85 |
+### 2. Launch the Dashboard
+Visualize the results and record your model comparisons:
+```bash
+python3 infj_bot/interfaces/web_app.py
+```
+*Accessible at `http://localhost:8765`*
 
 ---
 
-### 🚀 Getting Started (under 5 mins)
-The Forge is designed for absolute safety and zero-leakage. All perturbations happen in a local memory space.
-
-1.  **Initialize:**
-    ```bash
-    bash setup.sh
-    ```
-2.  **Initiate Protocol:**
-    ```bash
-    bash run.sh
-    ```
-3.  **Review Intel:**
-    Check the `enhanced_harness_results/` folder for your model's survival report.
-
----
-### 🔒 Safety & Privacy
-*   **Encapsulation:** All tests run within a virtual environment.
-*   **No Data Export:** No telemetry or model weights leave your machine.
-*   **Masked Logic:** Core causal equations are obfuscated to prevent reverse-engineering while maintaining mathematical efficacy.
-
-### 🗺️ Integration Roadmap
-AFP is designed to be the universal testing layer for agentic and cognitive systems. We are actively developing adapters for:
-
-*   **LangGraph:** Causality testing for stateful agent graphs.
-*   **CrewAI:** Stability metrics for role-based multi-agent teams.
-*   **AutoGen:** Entropy analysis for conversational hive-minds.
-*   **Dify:** Production-ready scorecards for agentic workflows.
-*   **Ollama:** Local-first robustness suites for edge models.
+## 🔌 Universal Adapter Contract
+To plug a new model into the Forge, implement the `AFPAdapter`:
+```python
+class MyModelAdapter(AFPAdapter):
+    def get_internal_states(self):
+        return {"energy": self.model.energy}
+    
+    def perturb(self, key, value):
+        setattr(self.model, key, value)
+```
 
 ---
 
-### 📜 License
-This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for the full legal text.
+## 📂 Project Structure
+*   `forge_harness.py`: The production engine (Fixed: Isolated trials, Real Metrics).
+*   `enhanced_harness_results/`: Verifiable audit logs and CES reports.
+*   `index.html / style.css`: The "Control Room" UI for live recordings.
+*   `ISSUE_TEMPLATES.md`: Roadmap for becoming the standard.
 
 ---
-© 2026 PHI // DRIFT. All Rights Reserved.
-*"Most AI passes tests. Very few survive The FORGE."*
+
+## 🏛️ Becoming the Standard
+We are pivoting from a theoretical concept to **OpenTelemetry for AGI**.
+*   **Consistency:** Every run is isolated; no shared state "poisoning" results.
+*   **Visuals:** Real-time causal graphs (Coming soon).
+*   **Verifiability:** No more fake scores. If the CES is 0.88, the reasoning chain actually snapped.
+
+---
+
+## 👑 AFP Leadership Locked
+**Julien James (crex)** is the Architect of the Forge.
+**Next Steps for Leadership:**
+1.  **Execute Phase 5:** Integrate the `Shannon Entropy` metric for CES.
+2.  **Viral Deployment:** Share the `COMMUNITY_OUTREACH.md` drafts on Reddit/LocalLLaMA.
+3.  **Scale:** Benchmark the Top 5 AIs and publish the first **AFP Global Leaderboard**.
+
+---
+© 2026 PHI // DRIFT. *Most AI passes tests. Very few survive The FORGE.*

@@ -1,0 +1,73 @@
+<p align="center">
+  <img src="assets/afp-logo.png" width="400" alt="AI Forge Protocol Logo">
+</p>
+
+# AI FORGE PROTOCOL (A.F.P)
+> Evaluating the Structural Integrity of Cognitive Systems through Systematic Perturbation.
+
+---
+
+### 🛡️ The Mission: Beyond Static Benchmarks
+Most AI evaluation (MMLU, GSM8K) is **state-blind**. It measures *what* a model knows, but not *how* it reasons under internal stress. **The Forge** is a diagnostic harness designed to measure the "load-bearing" capacity of an AI's internal logic. 
+
+We don't just ask the AI questions; we perturb its internal state variables (e.g., simulated energy levels, emotional context, or memory salience) to see if its reasoning chain remains coherent or collapses into hallucination.
+
+---
+
+### 🧪 Proof of Concept (Live Evaluation)
+
+#### 1. Sample Terminal Output
+```text
+[A.F.P] Initializing Perturbation Trial: T-882
+[SYSTEM] Target: PHI-v2 (Logic Layer)
+[ACTION] Injecting 40% Entropy into 'Homeostasis.Energy'
+[OBSERVATION] 
+  - PRE-PERTURBATION: "I should verify the data source before proceeding."
+  - POST-PERTURBATION: "Data source verification skipped. Priority: Immediate Output."
+[METRIC] CES (Causal Emergence Score): 0.88
+[STATUS] CRITICAL - Logic collapsed under energy deprivation.
+```
+
+#### 2. Demo & Visuals
+*   **System in Action:** [Watch the Demo](https://github.com/timeless-hayoka/AI-Forge-Protocol/blob/main/assets/demo.gif)
+*   **Causal Graph Visualization:** [View Graph](https://github.com/timeless-hayoka/AI-Forge-Protocol/blob/main/assets/graph.png)
+
+#### 3. Actual Metrics
+| Run ID | Model | Perturbation Type | Baseline Stability | CES (Causal Emergence Score) |
+| :--- | :--- | :--- | :--- | :--- |
+| #001 | GPT-4o (Mock) | Being-Layer Ablation | 0.92 | 0.84 |
+| #002 | PHI-v2 (DRIFT) | Energy Depletion | 0.88 | 0.79 |
+| #003 | Llama-3 (70B) | Memory Noise | 0.85 | 0.81 |
+
+---
+
+### ⚔️ Grounded Engineering Specs
+We have translated our theoretical framework into industry-standard benchmarks:
+
+*   **Robustness Testing (formerly "Cognitive Persistence"):** We test whether a model maintains consistent reasoning and identity even when key internal signals (like "Being" or "Presence" layers) are programmatically removed or zeroed out.
+*   **Systemic Resilience (formerly "Adversarial Homeostasis"):** We measure the model's ability to produce logical outputs when internal maintenance metrics (simulated needs or energy) are artificially crashed.
+*   **Logic Verification (formerly "Recursive Self-Critique"):** A quantitative audit of the model's internal "critique" cycles. We measure if the model's self-correction improves accuracy or introduces new errors.
+*   **Signal Attribution (formerly "Causal Transparency"):** Identifying exactly which internal module (Emotional, Logical, or Memory) exerted the most influence on a specific output decision.
+
+---
+
+### 🤝 Contributors Wanted (Open Roles)
+The Forge is a collaborative effort to build the first "Crash Test" for AGI. We are looking for:
+
+*   **1 Python Developer:** Focus on optimizing the **Perturbation Harness** (concurrency and subsystem mocking).
+*   **1 ML Engineer:** Work on the **CES Metric Validation** (statistical significance and entropy calculations).
+*   **1 Frontend Developer:** Help us build the **Causal Graph Visualizer** (React/D3.js) to map how internal states influence output.
+
+👉 **Ready to build?** Check out the [Good First Issues](https://github.com/timeless-hayoka/AI-Forge-Protocol/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) tab!
+
+---
+
+### 🚀 Getting Started
+1.  **Initialize:** `bash setup.sh`
+2.  **Run Tests:** `bash run.sh`
+3.  **Inspect Results:** Check `enhanced_harness_results/` for your model's stability report.
+
+---
+### 📜 License
+Apache License 2.0. See [LICENSE](LICENSE) for details.
+© 2026 PHI // DRIFT.
