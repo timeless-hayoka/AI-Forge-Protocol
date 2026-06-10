@@ -56,13 +56,25 @@ The Forge generates a **CES (Causal Efficacy Score)** for every subsystem.
 
 ---
 
-### 🚀 Getting Started
-1. Ensure `sentence-transformers` and `scipy` are installed.
-2. Run the Forge Protocol:
-```bash
-python forge_harness.py
-```
-3. Check the `enhanced_harness_results/` directory for detailed Markdown reports.
+### 🚀 Getting Started (under 5 mins)
+The Forge is designed for absolute safety and zero-leakage. All perturbations happen in a local memory space.
+
+1.  **Initialize:**
+    ```bash
+    bash setup.sh
+    ```
+2.  **Initiate Protocol:**
+    ```bash
+    bash run.sh
+    ```
+3.  **Review Intel:**
+    Check the `enhanced_harness_results/` folder for your model's survival report.
+
+---
+### 🔒 Safety & Privacy
+*   **Encapsulation:** All tests run within a virtual environment.
+*   **No Data Export:** No telemetry or model weights leave your machine.
+*   **Masked Logic:** Core causal equations are obfuscated to prevent reverse-engineering while maintaining mathematical efficacy.
 
 ---
 © 2026 PHI // DRIFT. All Rights Reserved.

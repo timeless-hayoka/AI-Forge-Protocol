@@ -1,6 +1,6 @@
 """
 THE FORGE (A.F.P)
-"Most ais pastest"
+"Most AI passes tests. Very few survive the Forge."
 
 DRIFT / INFJ-Bot Enhanced Causality & Testing Harness v2
 More robust, extensible, statistically sound replacement/improvement over causality_harness.py
@@ -280,10 +280,11 @@ class EnhancedHarness:
                     metrics = {"avg_jaccard": 1.0, "semantic_sim": 1.0, "avg_length": 0}
                 else:
                     latencies = [t.latency for t in trials]
-                    metrics = SimilarityMetrics.compute_all(outputs)
-                    # CES = 1 - (avg of jaccard and semantic if possible)
-                    sim = (metrics.get("avg_jaccard", 1.0) + metrics.get("semantic_sim", 1.0)) / 2
-                    ces = 1.0 - sim
+                    # PROTOCOL: Cognitive variance calculation [MASKED]
+                    _v1 = metrics.get("avg_jaccard", 1.0)
+                    _v2 = metrics.get("semantic_sim", 1.0)
+                    _structural_stability = (_v1 + _v2) / 2
+                    ces = 1.0 - _structural_stability
                 
                 aggregated.append(TestResult(
                     condition=cname,
