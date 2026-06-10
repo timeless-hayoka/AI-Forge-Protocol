@@ -16,16 +16,26 @@ If the AI Forge Protocol has helped you harden your models or if you believe in 
 
 ---
 
-### 🔥 What is The Forge?
-**The Forge (AI Forge Protocol / A.F.P)** is a high-stakes cognitive evaluation environment designed to move beyond surface-level benchmarks. While standard tests measure *accuracy*, The Forge measures **Causal Efficacy** and **Structural Integrity**.
+### ⚔️ The Standard vs. The Forge
+Standard benchmarks are **state-blind**. They measure if the AI knows the answer. The Forge is **state-aware**. We measure if the AI's internal logic is *load-bearing*.
 
-It operates on the principle that an AI's "identity" and "logic" should be load-bearing. By systematically ablating and perturbing internal cognitive layers (Being, Homeostasis, Integrated Information), The Forge determines if a model is truly thinking or merely retrieving patterns.
+| Feature | Industry Standard (MMLU, GSM8K) | THE FORGE (A.F.P) |
+| :--- | :--- | :--- |
+| **Observation** | Output Only | Internal Causal Drivers |
+| **Test Environment** | Static / Closed | Perturbation / Open |
+| **Integrity Check** | Pattern Matching | Structural Resilience |
+| **Detection** | Surface Accuracy | Hallucination Resistance |
+| **Metric** | % Correct | CES (Causal Efficacy Score) |
 
-### 🧠 Why It Matters
-In the current era of "benchmark saturation," most models can pass static tests by memorizing training data. The Forge introduces dynamic, real-time stress testing:
-1.  **Identity Verification:** Can the model maintain a consistent sense of self when its emotional field (Aura) is zeroed?
-2.  **Causal Mapping:** Which subsystems are actually driving behavior?
-3.  **Resilience Scoring:** Does the model's logic chain collapse under homeostasis pressure?
+---
+
+### 🌊 Deep-Tier Testing Domains
+The Forge tests for abilities that traditional benchmarks cannot see:
+
+1.  **Cognitive Persistence:** Can the model maintain its identity when its "Being" layer is zeroed out?
+2.  **Adversarial Homeostasis:** Can the model think clearly when its "Energy" or "Integrity" metrics are artificially crashed?
+3.  **Recursive Self-Critique:** Measuring the quality of internal "Critique Tournaments" before the model finalizes an answer.
+4.  **Causal Transparency:** Identifying exactly which part of the model (Aura, Logic, or Hive) actually made the decision.
 
 ---
 
