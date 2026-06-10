@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/afp-logo.png" width="400" alt="AI Forge Protocol Logo">
+</p>
+
 # AI FORGE PROTOCOL (A.F.P)
 > Most AI passes tests.
 > Very few survive The FORGE.
