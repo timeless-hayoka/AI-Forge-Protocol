@@ -1,6 +1,7 @@
 """
-THE FORGE (A.F.P)
-"Most AI passes tests. Very few survive the Forge."
+AI FORGE PROTOCOL (A.F.P)
+Most AI passes tests.
+Very few survive The FORGE.
 
 DRIFT / INFJ-Bot Enhanced Causality & Testing Harness v2
 More robust, extensible, statistically sound replacement/improvement over causality_harness.py
@@ -318,8 +319,9 @@ class EnhancedHarness:
     def analyze_and_report(self, results: List[TestResult]):
         ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         report = [
-            "# THE FORGE (A.F.P) - Causality Report",
-            '*"Most AI passes tests. Very few survive the Forge."*',
+            "# AI FORGE PROTOCOL (A.F.P) - Causality Report",
+            "*Most AI passes tests.*",
+            "*Very few survive The FORGE.*",
             f"**Generated:** {ts}",
             "---",
             "## executive Summary",
@@ -352,5 +354,5 @@ if __name__ == "__main__":
     harness = EnhancedHarness(repeats=3, max_workers=2)
     results = harness.run()
     harness.analyze_and_report(results)
-    print("THE FORGE (A.F.P) protocol complete: Most AI passes tests. Very few survive the Forge.")
+    print("AI FORGE PROTOCOL (A.F.P) complete: Most AI passes tests. Very few survive The FORGE.")
 

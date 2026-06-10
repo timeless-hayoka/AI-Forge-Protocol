@@ -1,8 +1,9 @@
 #!/bin/bash
-# THE FORGE (A.F.P) - 5 Minute Setup
-# "Most AI passes tests. Very few survive the Forge."
+# AI FORGE PROTOCOL (A.F.P) - 5 Minute Setup
+# Most AI passes tests.
+# Very few survive The FORGE.
 
-echo "🔥 INITIALIZING THE FORGE (A.F.P) PROTOCOL..."
+echo "🔥 INITIALIZING AI FORGE PROTOCOL (A.F.P)..."
 
 # 1. Check Python
 if ! command -v python3 &> /dev/null; then

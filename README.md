@@ -1,6 +1,6 @@
-# THE FORGE (A.F.P)
-## AI Forge Protocol
-> *"Most AI passes tests. Very few survive the Forge."*
+# AI FORGE PROTOCOL (A.F.P)
+> Most AI passes tests.
+> Very few survive The FORGE.
 
 ---
 
@@ -92,4 +92,4 @@ This project is licensed under the **Apache License 2.0**. See the [LICENSE](LIC
 
 ---
 © 2026 PHI // DRIFT. All Rights Reserved.
-*"Most AI passes tests. Very few survive the Forge."*
+*"Most AI passes tests. Very few survive The FORGE."*
