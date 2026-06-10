@@ -86,7 +86,17 @@ The Forge is designed for absolute safety and zero-leakage. All perturbations ha
 *   **No Data Export:** No telemetry or model weights leave your machine.
 *   **Masked Logic:** Core causal equations are obfuscated to prevent reverse-engineering while maintaining mathematical efficacy.
 
+### 🗺️ Integration Roadmap
+AFP is designed to be the universal testing layer for agentic and cognitive systems. We are actively developing adapters for:
+
+*   **LangGraph:** Causality testing for stateful agent graphs.
+*   **CrewAI:** Stability metrics for role-based multi-agent teams.
+*   **AutoGen:** Entropy analysis for conversational hive-minds.
+*   **Dify:** Production-ready scorecards for agentic workflows.
+*   **Ollama:** Local-first robustness suites for edge models.
+
 ---
+
 ### 📜 License
 This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for the full legal text.
 

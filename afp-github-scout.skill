@@ -1,0 +1,24 @@
+# SKILL: AFP GitHub Scout
+## Purpose: Autonomously identify and evaluate high-impact repositories for AI Forge Protocol (A.F.P) integration.
+
+### Core Objectives:
+1.  **Repo Discovery:** Scan GitHub for projects with the "cognitive-ai", "agentic-workflows", or "multi-agent-systems" topics.
+2.  **Robustness Audit:** Analyze the target repo's existing test suite. Look for a lack of:
+    *   Causality Ablation (State-aware testing)
+    *   Semantic Entropy metrics
+    *   Homeostatic Stability (Energy/Focus/Integrity simulations)
+3.  **Fit Score:** Assign a score from 0-100 based on A.F.P's ability to harden the target system.
+4.  **Strategy Generation:** Propose the exact `TestForgeAdapter` implementation for the candidate.
+
+### Workflow:
+1.  **Stimulus:** "Find me 3 new candidates for The Forge."
+2.  **Action:** Search GitHub API/Web for high-growth agentic repos.
+3.  **Action:** Read their `README` and `tests/` directory.
+4.  **Output:** Generate a **Forge Integration Report** using the standard A.F.P format.
+
+### Knowledge Base:
+*   **State-Blind Benchmarks:** MMLU, GSM8K, HumanEval. (Standard, passible by pattern-matching).
+*   **State-Aware Metrics:** CES (Causal Efficacy), $\Phi$ (Integrated Info), Predictive Salience. (A.F.P standard).
+
+---
+*"Most AI passes tests. Very few survive The FORGE."*
