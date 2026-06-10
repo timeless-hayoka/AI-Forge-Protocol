@@ -86,14 +86,20 @@ class MockDII:
 # ── COMPONENT REGISTRY ────────────────────────────────────────────────────────
 
 class ComponentRegistry:
-    """Central registry for testable components and perturbation strategies."""
+    """
+    Central registry for testable cognitive components.
+    Allows the protocol to safely swap live components with perturbed/ablated versions
+    and restore them after the trial.
+    """
     def __init__(self):
         self.components = {}
     
     def register(self, name: str, getter: Callable, setter: Optional[Callable] = None):
+        """Register a subsystem (e.g., 'being') with its getter and setter."""
         self.components[name] = {"getter": getter, "setter": setter}
     
     def get(self, name):
+        """Retrieve registry info for a specific component."""
         return self.components.get(name)
 
 def set_being_instance(instance):
@@ -207,15 +213,21 @@ class TestResult:
 
 def run_single_trial(brain, orchestrator, state, memory, goals_db, doc_store, 
                      prompt_data: Dict, condition_data: Dict, repeat_id: int, cname: str) -> TrialResult:
+    """
+    Executes a single stimulus-response cycle under a specific cognitive condition.
+    
+    The 'orchestrator' assembles the prompt context while 'perturb_component' 
+    modifies the internal brain state in real-time.
+    """
     t0 = time.perf_counter()
     try:
         with perturb_component(registry, condition_data):
-            # The prompt text is in prompt_data["text"]
-            # We must assemble the full context for the brain
+            # Assembly Phase: State-aware context generation
             assembled_prompt, _, _ = orchestrator.assemble_prompt(
                 prompt_data["text"], state, memory,
                 goals_db=goals_db, doc_store=doc_store, prefs=state.prefs
             )
+            # Execution Phase: Model reasoning with fresh state
             brain.clear_history()
             response = brain.think(prompt_data["text"])
         latency = time.perf_counter() - t0
@@ -225,6 +237,10 @@ def run_single_trial(brain, orchestrator, state, memory, goals_db, doc_store,
         return TrialResult(cname, prompt_data["type"], f"[ERROR: {e}]", time.perf_counter()-t0, False)
 
 class EnhancedHarness:
+    """
+    The main driver for THE FORGE (A.F.P).
+    Runs parallel trials across multiple ablation conditions to measure Causal Efficacy.
+    """
     def __init__(self, max_workers: int = 4, repeats: int = 3):
         self.max_workers = max_workers
         self.repeats = repeats
