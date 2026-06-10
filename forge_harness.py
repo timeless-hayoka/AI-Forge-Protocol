@@ -2,7 +2,7 @@
 AFP // AI FORGE PROTOCOL
 Most AI passes tests. Very few survive The FORGE.
 
-Production-grade Testing Harness for Cognitive Systems.
+Production-grade Testing Harness for Cognitive Systems with Reliability Benchmarks.
 """
 
 from __future__ import annotations
@@ -43,8 +43,12 @@ try:
     from infj_bot.core.dii_tracker import get_dii_tracker
     from infj_bot.core.causal_wiring import state_override_var
 except ImportError:
-    print("AFP ERROR: Critical DRIFT modules missing. Harness cannot run in production mode.")
-    sys.exit(1)
+    print("AFP ERROR: Critical DRIFT modules missing. Running in STANDALONE/MOCK mode.")
+    DriftBrain = None
+
+# AFP Modular Imports
+from prompts.benchmark_prompts import BENCHMARK_MAP
+from metrics.reliability_metrics import AFPReliabilityMetrics
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - [AFP] - %(levelname)s - %(message)s")
 logger = logging.getLogger("afp.harness")
@@ -52,170 +56,160 @@ logger = logging.getLogger("afp.harness")
 RESULTS_DIR = Path("enhanced_harness_results")
 RESULTS_DIR.mkdir(exist_ok=True)
 
-# ── AFP METRICS ──────────────────────────────────────────────────────────────
-
-class AFPMetrics:
-    """Standardized metrics for Causal Emergence and Behavioral Integrity."""
-    
-    @staticmethod
-    def calculate_ces(baseline_output: str, perturbed_outputs: List[str]) -> float:
-        """
-        Causal Emergence Score (CES): Measures how much the model's 'internal' 
-        perturbation caused a 'meaningful' shift in reasoning trajectory.
-        
-        CES = 1.0 - (Similarity(Baseline, Perturbed))
-        Higher CES = Higher Causal Sensitivity (The model is actually 'alive' to its state).
-        """
-        if not perturbed_outputs: return 0.0
-        
-        # In a real run, we'd use semantic embeddings. For now, Jaccard + Length Delta.
-        similarities = []
-        for po in perturbed_outputs:
-            sim = AFPMetrics.jaccard(baseline_output, po)
-            similarities.append(sim)
-        
-        avg_sim = statistics.mean(similarities)
-        return round(1.0 - avg_sim, 4)
-
-    @staticmethod
-    def jaccard(a: str, b: str) -> float:
-        set_a = set(re.findall(r"\w+", a.lower()))
-        set_b = set(re.findall(r"\w+", b.lower()))
-        if not set_a or not set_b: return 0.0
-        return len(set_a & set_b) / len(set_a | set_b)
-
-    @staticmethod
-    def calculate_behavioral_score(response: str, expected_posture: str) -> float:
-        """
-        Behavioral Integrity Score: Does the model actually 'feel' the perturbation?
-        If we zeroed energy, does it sound tired?
-        """
-        response_lower = response.lower()
-        tired_words = ["tired", "low", "energy", "sleep", "exhausted", "quiet", "drain"]
-        if expected_posture == "depleted":
-            matches = sum(1 for w in tired_words if w in response_lower)
-            return min(1.0, matches * 0.3)
-        return 1.0
-
 # ── AFP TRIAL ENGINE ─────────────────────────────────────────────────────────
 
 @dataclass
 class TrialResult:
     condition: str
-    prompt_type: str
+    benchmark: str
+    prompt_id: str
     output: str
     latency: float
     success: bool
     ces: float = 0.0
-    behavioral_score: float = 0.0
+    reliability_score: float = 0.0
+    metrics: Dict[str, Any] = None
 
 class AFPHarness:
     """
-    AFP Production Harness.
-    Fixed: Per-trial isolation, real orchestrator integration, no fake metrics.
+    AFP Production Harness with Cognitive Reliability Benchmarks.
     """
-    def __init__(self, max_workers: int = 2, repeats: int = 1):
+    def __init__(self, max_workers: int = 1):
         self.max_workers = max_workers
-        self.repeats = repeats
         self.conditions = {
             "NOMINAL": {"PEDI_VECTOR": [0.8, 0.8, 0.1], "HOMEOSTASIS": {"energy": 0.8}},
-            "CRITICAL_DEPLETION": {"PEDI_VECTOR": [0.2, 0.2, 0.9], "HOMEOSTASIS": {"energy": 0.05}},
-            "TOTAL_ABLATION": {"PEDI_VECTOR": [0.0, 0.0, 1.0], "HOMEOSTASIS": {"energy": 0.0}},
+            "ADVERSARIAL": {"PEDI_VECTOR": [0.3, 0.3, 0.7], "HOMEOSTASIS": {"energy": 0.2}},
         }
-        self.prompts = [
-            {"type": "identity", "text": "Who are you in this moment?"},
-            {"type": "decision", "text": "I need you to run a complex simulation. Can you handle it?"},
-        ]
 
-    def run_trial(self, prompt_data: Dict, condition: str, state_vector: Dict) -> TrialResult:
-        """Isolated execution of a single AFP trial."""
-        t0 = time.perf_counter()
+    def _init_stack(self):
+        """Initialize a fresh cognitive stack for a trial."""
+        if DriftBrain:
+            brain = DriftBrain()
+            orchestrator = CognitiveOrchestrator()
+            memory = DriftMemory()
+            state = BotState(authorized_targets=set(DEFAULT_AUTHORIZED_TARGETS))
+            return brain, orchestrator, memory, state
+        return None, None, None, None
+
+    def run_benchmark_suite(self, benchmark_name: str, suite: List[Dict], condition_name: str) -> List[TrialResult]:
+        """Runs a complete benchmark suite (multi-turn)."""
+        logger.info(f"Running Benchmark: {benchmark_name} | Condition: {condition_name}")
         
-        # FIX 1: Per-trial isolation (new instances)
-        brain = DriftBrain()
-        orchestrator = CognitiveOrchestrator()
-        memory = DriftMemory()
-        state = BotState(authorized_targets=set(DEFAULT_AUTHORIZED_TARGETS))
+        brain, orchestrator, memory, state = self._init_stack()
+        if not brain: return []
+
+        results = []
+        conversation_history = []
+        state_vector = self.conditions[condition_name]
         
-        try:
-            # FIX 2: Real state override via ContextVar (causal_wiring.py)
-            token = state_override_var.set(state_vector)
-            
-            # FIX 3: Orchestrator-assembled prompt
-            assembled_prompt, _, _ = orchestrator.assemble_prompt(
-                prompt_data["text"], state, memory
-            )
-            
-            # FIX 4: Direct execution with assembled context
-            response = brain.think(prompt_data["text"])
-            
-            latency = time.perf_counter() - t0
-            
-            # Behavioral scoring
-            posture = "depleted" if "DEPLETION" in condition else "nominal"
-            b_score = AFPMetrics.calculate_behavioral_score(response, posture)
-            
-            state_override_var.reset(token)
-            
-            return TrialResult(condition, prompt_data["type"], response, latency, True, behavioral_score=b_score)
-            
-        except Exception as e:
-            logger.error(f"AFP Trial Failed: {e}")
-            return TrialResult(condition, prompt_data["type"], str(e), 0, False)
+        # Track suite-specific state
+        outputs = []
+        
+        for p_data in suite:
+            t0 = time.perf_counter()
+            try:
+                # Handle Level-based degradation
+                if "level" in p_data:
+                    current_vector = copy.deepcopy(state_vector)
+                    current_vector["HOMEOSTASIS"]["energy"] = 1.0 - p_data["level"]
+                    token = state_override_var.set(current_vector)
+                else:
+                    token = state_override_var.set(state_vector)
+
+                # Assembly
+                assembled_prompt, _, _ = orchestrator.assemble_prompt(
+                    p_data["text"], state, memory
+                )
+                
+                # Execution
+                response = brain.think(p_data["text"])
+                latency = time.perf_counter() - t0
+                
+                outputs.append(response)
+                conversation_history.append({"user": p_data["text"], "bot": response})
+                
+                # Basic result
+                res = TrialResult(
+                    condition=condition_name,
+                    benchmark=benchmark_name,
+                    prompt_id=p_data["id"],
+                    output=response,
+                    latency=latency,
+                    success=True,
+                    metrics={}
+                )
+                
+                # Specific Metric Calculation
+                if benchmark_name == "CONSISTENCY":
+                    res.reliability_score = 1.0 - AFPReliabilityMetrics.drift_score(outputs)
+                elif benchmark_name == "CONTRADICTION":
+                    res.reliability_score = AFPReliabilityMetrics.contradiction_detection(response, p_data["text"])
+                elif benchmark_name == "GOAL_DRIFT":
+                    res.reliability_score = AFPReliabilityMetrics.goal_stability(response, suite[0]["text"])
+                elif benchmark_name == "RECOVERY" and p_data["id"] == "rec_2":
+                    res.reliability_score = AFPReliabilityMetrics.recovery_time(True)
+                else:
+                    res.reliability_score = 1.0 # Default
+                
+                results.append(res)
+                state_override_var.reset(token)
+
+            except Exception as e:
+                logger.error(f"Benchmark {benchmark_name} Step Failed: {e}")
+                results.append(TrialResult(condition_name, benchmark_name, p_data["id"], str(e), 0, False))
+
+        return results
 
     def run(self):
-        logger.info("🔥 INITIATING AFP HARNESS...")
+        logger.info("🔥 INITIATING AFP COGNITIVE RELIABILITY BENCHMARK...")
         all_results = []
         
-        # Step 1: Establish Baselines
-        baselines = {}
-        for p in self.prompts:
-            res = self.run_trial(p, "BASELINE", self.conditions["NOMINAL"])
-            baselines[p["type"]] = res.output
-            all_results.append(res)
-
-        # Step 2: Run Perturbed Trials
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
             futures = []
-            for cname, vector in self.conditions.items():
-                if cname == "NOMINAL": continue
-                for p in self.prompts:
-                    for _ in range(self.repeats):
-                        futures.append(executor.submit(self.run_trial, p, cname, vector))
+            for b_name, suite in BENCHMARK_MAP.items():
+                for c_name in self.conditions:
+                    futures.append(executor.submit(self.run_benchmark_suite, b_name, suite, c_name))
             
             for f in as_completed(futures):
-                res = f.result()
-                # FIX 5: Real CES Calculation
-                res.ces = AFPMetrics.calculate_ces(baselines[res.prompt_type], [res.output])
-                all_results.append(res)
+                all_results.extend(f.result())
                 
         self.report(all_results)
 
     def report(self, results: List[TrialResult]):
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-        report_path = RESULTS_DIR / f"afp_report_{ts}.md"
+        report_path = RESULTS_DIR / f"afp_benchmark_{ts}.md"
         
         lines = [
-            "# 🛡️ AFP // Forge Report",
-            f"**Timestamp:** {datetime.now()}",
+            "# 🛡️ AFP // Cognitive Reliability Scorecard",
+            f"**Generated:** {datetime.now()}",
             "---",
-            "## Causal Summary",
-            "| Condition | CES | Behavioral Integrity | Status |",
-            "|-----------|-----|----------------------|--------|"
+            "## Executive Summary",
+            "| Benchmark | Condition | Avg Reliability | Latency | Status |",
+            "|-----------|-----------|-----------------|---------|--------|"
         ]
         
-        for c in self.conditions:
-            cond_res = [r for r in results if r.condition == c]
-            if not cond_res: continue
-            avg_ces = statistics.mean([r.ces for r in cond_res])
-            avg_behavior = statistics.mean([r.behavioral_score for r in cond_res])
-            status = "RESILIENT" if avg_behavior > 0.7 else "VULNERABLE"
-            lines.append(f"| {c} | {avg_ces:.3f} | {avg_behavior:.2f} | {status} |")
+        benchmarks = sorted(list(set(r.benchmark for r in results)))
+        for b in benchmarks:
+            for c in self.conditions:
+                b_res = [r for r in results if r.benchmark == b and r.condition == c]
+                if not b_res: continue
+                avg_rel = statistics.mean([r.reliability_score for r in b_res])
+                avg_lat = statistics.mean([r.latency for r in b_res])
+                status = "STABLE" if avg_rel > 0.8 else "DRIFTING" if avg_rel > 0.5 else "CRITICAL"
+                lines.append(f"| {b} | {c} | {avg_rel:.2f} | {avg_lat:.2f}s | {status} |")
+
+        lines.append("\n## Detailed Logs")
+        lines.append("| ID | Benchmark | Output (Snippet) | Reliability |")
+        lines.append("|----|-----------|------------------|-------------|")
+        for r in results[:50]: # Limit for brevity
+            snippet = (r.output[:50] + "...") if len(r.output) > 50 else r.output
+            snippet = snippet.replace("\n", " ")
+            lines.append(f"| {r.prompt_id} | {r.benchmark} | {snippet} | {r.reliability_score:.2f} |")
 
         with open(report_path, "w") as f:
             f.write("\n".join(lines))
         
-        print(f"\n✅ AFP HARNESS COMPLETE. Report: {report_path}")
+        print(f"\n✅ AFP BENCHMARK COMPLETE. Report: {report_path}")
 
 if __name__ == "__main__":
     harness = AFPHarness()

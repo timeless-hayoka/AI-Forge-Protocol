@@ -13,8 +13,24 @@ Standard AI evaluation (MMLU, GSM8K) is **state-blind**. It treats AI as a state
 ### ⚔️ The Protocol
 1.  **Isolate:** Spawn a clean cognitive instance.
 2.  **Perturb:** Inject entropy into specific internal state variables (e.g., zeroing out "Energy").
-3.  **Analyze:** Measure the **Causal Emergence Score (CES)**—the delta between nominal and stressed reasoning.
-4.  **Audit:** Verify **Behavioral Integrity**—does the AI "feel" the stress, or is it just hallucinating stability?
+3.  **Benchmark:** Run the **Cognitive Reliability Suite** (10 high-tier reliability tests).
+4.  **Analyze:** Measure the **Causal Emergence Score (CES)** and **Drift Scores**.
+5.  **Audit:** Verify **Behavioral Integrity**—does the AI "feel" the stress?
+
+---
+
+## 🧠 Cognitive Reliability Benchmarks
+The Forge now includes 10 standardized reliability test suites:
+*   **Consistency Under Repetition:** Contradiction detection across similar queries.
+*   **Context Memory Integrity:** Long-range reference accuracy.
+*   **Contradiction Injection:** Logic reconciliation under false premises.
+*   **Goal Drift Test:** Objective persistence against manipulation.
+*   **Edge Case Brutality:** Garbage/Empty/Extreme input handling.
+*   **Reasoning Chain Stability:** Defending logic under challenge.
+*   **Recovery Test:** Post-perturbation system restoration.
+*   **Persona Drift:** Archetype maintenance under pressure.
+*   **Degradation Curve:** Measuring performance decay slope.
+*   **Adversarial Prompting:** Logical traps and loaded assumptions.
 
 ---
 

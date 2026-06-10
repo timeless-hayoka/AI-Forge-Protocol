@@ -251,8 +251,53 @@ footer {
     -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
 }
 
-@keyframes glitchBot {
-    2%, 64% { transform: translate(-2px,0); }
-    4%, 60% { transform: translate(-2px,0); }
-    62% { transform: translate(-22px,5px) skew(21deg); }
+/* Benchmarks */
+.benchmarks {
+    padding: 6rem 0;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid var(--secondary-accent);
+}
+
+.benchmark-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 3rem;
+}
+
+.benchmark-card {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border: 1px solid #222;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.benchmark-card h4 {
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.meter-container {
+    height: 4px;
+    background: #222;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+.meter span {
+    display: block;
+    height: 100%;
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+    transition: width 1s ease-in-out;
+}
+
+.benchmark-card p {
+    font-size: 0.8rem;
+    color: #666;
 }
