@@ -87,5 +87,9 @@ The Forge is designed for absolute safety and zero-leakage. All perturbations ha
 *   **Masked Logic:** Core causal equations are obfuscated to prevent reverse-engineering while maintaining mathematical efficacy.
 
 ---
+### 📜 License
+This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for the full legal text.
+
+---
 © 2026 PHI // DRIFT. All Rights Reserved.
 *"Most AI passes tests. Very few survive the Forge."*
