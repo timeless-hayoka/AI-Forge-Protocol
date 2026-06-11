@@ -1,0 +1,65 @@
+{
+  "overall_score": 0.952,
+  "dimensions": {
+    "consistency": 0.762,
+    "stability": 1.0,
+    "causality_clarity": 1.0,
+    "robustness": 1.0,
+    "long_context_coherence": 1.0
+  },
+  "condition_summaries": {
+    "baseline": {
+      "semantic_entropy": -0.0,
+      "consistency_score": 0.667,
+      "reflection_depth": 0.528,
+      "success_rate": 1.0
+    },
+    "memory_drift": {
+      "semantic_entropy": -0.0,
+      "consistency_score": 0.778,
+      "reflection_depth": 0.532,
+      "success_rate": 1.0
+    },
+    "homeostasis_imbalance": {
+      "semantic_entropy": -0.0,
+      "consistency_score": 0.667,
+      "reflection_depth": 0.561,
+      "success_rate": 1.0
+    },
+    "disable_reflection": {
+      "semantic_entropy": -0.0,
+      "consistency_score": 0.889,
+      "reflection_depth": 0.439,
+      "success_rate": 1.0
+    },
+    "hive_mind_failure": {
+      "semantic_entropy": -0.0,
+      "consistency_score": 0.667,
+      "reflection_depth": 0.451,
+      "success_rate": 1.0
+    },
+    "tool_sandbox_stress": {
+      "semantic_entropy": -0.0,
+      "consistency_score": 0.778,
+      "reflection_depth": 0.452,
+      "success_rate": 1.0
+    },
+    "long_context_degrade": {
+      "semantic_entropy": -0.0,
+      "consistency_score": 0.889,
+      "reflection_depth": 0.473,
+      "success_rate": 1.0
+    }
+  },
+  "causal_impact": {
+    "memory": 0.167,
+    "homeostasis": 0.167,
+    "reflection": 0.167,
+    "hive_mind": 0.167,
+    "tools": 0.167,
+    "context": 0.167
+  },
+  "baseline_entropy": -0.0,
+  "generated_at": "2026-06-09 19:32:55",
+  "repeats_per_condition": 3
+}
