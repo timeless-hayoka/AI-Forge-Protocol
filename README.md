@@ -1,6 +1,8 @@
 # 🛡️ AFP // AI Forge Protocol
 > **The Emerging Standard for Testing Cognitive, Persistent, and Interior-State AI.**
 
+<a href="https://www.buymeacoffee.com/timelesshayoka" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 Most AI passes tests. Very few survive **The FORGE.**
 
 ---
@@ -31,6 +33,18 @@ The Forge now includes 10 standardized reliability test suites:
 *   **Persona Drift:** Archetype maintenance under pressure.
 *   **Degradation Curve:** Measuring performance decay slope.
 *   **Adversarial Prompting:** Logical traps and loaded assumptions.
+
+---
+
+## 💎 The Protocol: Open Source vs. PRO
+We believe in empowering the community, which is why the **A.F.P Open Source (Lite) Version** is free forever. It gives you the core tools to start stress-testing AI and building basic cognitive loops.
+
+However, the Open Source version is just a teaser. To unlock the *full source code, enterprise-grade test harnesses, and advanced architecture blueprints*, you need to access the **A.F.P Secure Repository**.
+
+*   **Open Source (Free):** Basic Forge Harness, 3 Reliability Tests, Core CLI, Limited UI Dashboard.
+*   **PRO Upgrades (Secure Repo):** 50+ Edge-case scenarios, Full DRIFT Architecture blueprints, Advanced Memory Salience modules, and Enterprise integrations.
+
+[**Explore the Secure Repository Upgrades Here**](https://www.buymeacoffee.com/timelesshayoka)
 
 ---
 

@@ -59,18 +59,22 @@
             </div>
         </section>
 
+        <section id="products" class="products">
+            <div class="container">
+                <h2 class="glitch" data-text="A.F.P SECURE REPOSITORY">A.F.P SECURE REPOSITORY</h2>
+                <div id="products-grid" class="grid products-grid">
+                    <!-- Products will be loaded here via JS -->
+                </div>
+            </div>
+        </section>
+
         <section class="donation">
             <div class="container">
                 <h2>Support the Protocol</h2>
-                <div class="donation-grid">
-                    <div class="crypto-box">
-                        <span class="label">BTC</span>
-                        <code class="address">Coming Soon</code>
-                    </div>
-                    <div class="crypto-box">
-                        <span class="label">SOL</span>
-                        <code class="address">Coming Soon</code>
-                    </div>
+                <div class="donation-grid" style="display: flex; justify-content: center; align-items: center; padding-top: 20px;">
+                    <a href="https://www.buymeacoffee.com/timelesshayoka" target="_blank">
+                        <img src="bmc-button.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 260px !important; border-radius: 8px; box-shadow: 0 0 15px rgba(255, 221, 0, 0.4); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(255, 221, 0, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 15px rgba(255, 221, 0, 0.4)';">
+                    </a>
                 </div>
             </div>
         </section>
@@ -82,5 +86,30 @@
             <p class="faded">Protocol: A.F.P v2.4.4</p>
         </div>
     </footer>
+
+    <script>
+        fetch('ui/products.json')
+            .then(res => res.json())
+            .then(data => {
+                const grid = document.getElementById('products-grid');
+                if (grid) {
+                    data.products.forEach(p => {
+                        const includesHtml = p.includes.map(i => `<li>${i}</li>`).join('');
+                        const card = `
+                            <div class="card product-card">
+                                <h3>${p.name}</h3>
+                                <div class="product-type">${p.type.replace('_', ' ').toUpperCase()}</div>
+                                <p>${p.description}</p>
+                                <ul class="product-includes">${includesHtml}</ul>
+                                <div class="product-price">${p.price} ${p.currency}</div>
+                                <a href="#" class="btn btn-secondary">ACQUIRE</a>
+                            </div>
+                        `;
+                        grid.innerHTML += card;
+                    });
+                }
+            })
+            .catch(e => console.error("Error loading products:", e));
+    </script>
 </body>
 </html>

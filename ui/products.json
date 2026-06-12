@@ -1,0 +1,60 @@
+{
+  "products": [
+    {
+      "id": "drift_whitepaper",
+      "name": "DRIFT Whitepaper (Full Spec)",
+      "type": "digital_download",
+      "price": 15,
+      "currency": "USD",
+      "description": "The open-source version gives you the core concepts. The full whitepaper gives you the exact blueprints to replicate our 5-layer cognitive architecture.",
+      "includes": [
+        "Full DRIFT architecture breakdown",
+        "Proprietary diagrams and system flows",
+        "Implementation notes (Not in open-source)",
+        "Future roadmap insights"
+      ]
+    },
+    {
+      "id": "cognitive_loop_guide",
+      "name": "Build Your Own Cognitive Loop",
+      "type": "digital_download",
+      "price": 25,
+      "currency": "USD",
+      "description": "Beyond the basic open-source scripts: A step-by-step masterclass on designing adaptive AI loops with feedback, persistent memory, and state evolution.",
+      "includes": [
+        "Input → State → Output loop design",
+        "Feedback system implementation",
+        "Advanced code examples",
+        "Optimization strategies"
+      ]
+    },
+    {
+      "id": "forge_starter_kit",
+      "name": "Forge Testing Framework PRO",
+      "type": "digital_download",
+      "price": 35,
+      "currency": "USD",
+      "description": "The open-source Forge is a great teaser. The PRO kit provides the production-ready harness we use internally for deep causal perturbation.",
+      "includes": [
+        "Advanced testing harness (Pro Version)",
+        "50+ Edge-case scenarios",
+        "Advanced metrics & CES tracking tools",
+        "Enterprise integration instructions"
+      ]
+    },
+    {
+      "id": "lotus_cyber_module",
+      "name": "LOTUS Academy: Beginner Cybersecurity",
+      "type": "course",
+      "price": 20,
+      "currency": "USD",
+      "description": "Foundational cybersecurity training with hands-on lessons, tools, and real-world workflows that integrate with your AI agents.",
+      "includes": [
+        "Terminal basics",
+        "Networking fundamentals",
+        "Intro to scanning tools",
+        "Guided exercises"
+      ]
+    }
+  ]
+}

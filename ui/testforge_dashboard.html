@@ -8,6 +8,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .node circle {
+            fill: #00f0ff;
+            stroke: #000;
+            stroke-width: 1.5px;
+        }
+        .node text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            fill: #fff;
+        }
+        .link {
+            fill: none;
+            stroke: #00f0ff;
+            stroke-opacity: 0.6;
+            stroke-width: 2px;
+        }
+        .causal-graph-container {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00f0ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 40px;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
     <div class="background-overlay"></div>
@@ -85,21 +112,31 @@
                         <p>System Shock Resilience</p>
                     </div>
                 </div>
+                
+                <!-- Causal Graph Visualization -->
+                <div class="causal-graph-container">
+                    <h3 class="glitch" data-text="CAUSAL PERTURBATION GRAPH">CAUSAL PERTURBATION GRAPH</h3>
+                    <div id="causalGraph"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="products">
+            <div class="container">
+                <h2 class="glitch" data-text="A.F.P SECURE REPOSITORY">A.F.P SECURE REPOSITORY</h2>
+                <div id="products-grid" class="grid products-grid">
+                    <!-- Products will be loaded here via JS -->
+                </div>
             </div>
         </section>
 
         <section class="donation">
             <div class="container">
                 <h2>Support the Protocol</h2>
-                <div class="donation-grid">
-                    <div class="crypto-box">
-                        <span class="label">BTC</span>
-                        <code class="address">Coming Soon</code>
-                    </div>
-                    <div class="crypto-box">
-                        <span class="label">SOL</span>
-                        <code class="address">Coming Soon</code>
-                    </div>
+                <div class="donation-grid" style="display: flex; justify-content: center; align-items: center; padding-top: 20px;">
+                    <a href="https://www.buymeacoffee.com/timelesshayoka" target="_blank">
+                        <img src="bmc-button.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 260px !important; border-radius: 8px; box-shadow: 0 0 15px rgba(255, 221, 0, 0.4); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(255, 221, 0, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 15px rgba(255, 221, 0, 0.4)';">
+                    </a>
                 </div>
             </div>
         </section>
@@ -111,5 +148,128 @@
             <p class="faded">Protocol: A.F.P v2.4.4</p>
         </div>
     </footer>
+
+    <script>
+        fetch('products.json')
+            .then(res => res.json())
+            .then(data => {
+                const grid = document.getElementById('products-grid');
+                if (grid) {
+                    data.products.forEach(p => {
+                        const includesHtml = p.includes.map(i => `<li>${i}</li>`).join('');
+                        const card = `
+                            <div class="card product-card">
+                                <h3>${p.name}</h3>
+                                <div class="product-type">${p.type.replace('_', ' ').toUpperCase()}</div>
+                                <p>${p.description}</p>
+                                <ul class="product-includes">${includesHtml}</ul>
+                                <div class="product-price">${p.price} ${p.currency}</div>
+                                <a href="#" class="btn btn-secondary">ACQUIRE</a>
+                            </div>
+                        `;
+                        grid.innerHTML += card;
+                    });
+                }
+            })
+            .catch(e => console.error("Error loading products:", e));
+    </script>
+
+    <script>
+        // D3.js Causal Graph Initialization
+        const graphData = {
+            nodes: [
+                { id: "Stimulus", group: 1 },
+                { id: "Aura", group: 2 },
+                { id: "Pulse", group: 2 },
+                { id: "Vibe", group: 2 },
+                { id: "Meme", group: 3 },
+                { id: "Logic", group: 3 },
+                { id: "Ethos", group: 3 },
+                { id: "Nexus", group: 4 },
+                { id: "Response", group: 5 }
+            ],
+            links: [
+                { source: "Stimulus", target: "Aura", value: 1 },
+                { source: "Stimulus", target: "Pulse", value: 1 },
+                { source: "Aura", target: "Vibe", value: 1 },
+                { source: "Pulse", target: "Vibe", value: 1 },
+                { source: "Vibe", target: "Meme", value: 1 },
+                { source: "Vibe", target: "Logic", value: 1 },
+                { source: "Vibe", target: "Ethos", value: 1 },
+                { source: "Meme", target: "Nexus", value: 1 },
+                { source: "Logic", target: "Nexus", value: 1 },
+                { source: "Ethos", target: "Nexus", value: 1 },
+                { source: "Nexus", target: "Response", value: 1 }
+            ]
+        };
+
+        const width = 800;
+        const height = 400;
+
+        const svg = d3.select("#causalGraph")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", height)
+            .attr("viewBox", [0, 0, width, height]);
+
+        const simulation = d3.forceSimulation(graphData.nodes)
+            .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(100))
+            .force("charge", d3.forceManyBody().strength(-300))
+            .force("center", d3.forceCenter(width / 2, height / 2));
+
+        const link = svg.append("g")
+            .attr("class", "links")
+            .selectAll("line")
+            .data(graphData.links)
+            .enter().append("line")
+            .attr("class", "link");
+
+        const node = svg.append("g")
+            .attr("class", "nodes")
+            .selectAll("g")
+            .data(graphData.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        node.append("circle")
+            .attr("r", 8);
+
+        node.append("text")
+            .attr("dx", 12)
+            .attr("dy", ".35em")
+            .text(d => d.id);
+
+        simulation.on("tick", () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node
+                .attr("transform", d => `translate(${d.x},${d.y})`);
+        });
+
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+    </script>
 </body>
 </html>

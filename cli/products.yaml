@@ -1,0 +1,17 @@
+products:
+  - id: drift_whitepaper
+    name: "DRIFT Whitepaper (Full Spec)"
+    price: 15
+    type: digital
+  - id: cognitive_loop_guide
+    name: "Build Your Own Cognitive Loop (Pro Guide)"
+    price: 25
+    type: digital
+  - id: forge_starter_kit
+    name: "Forge Testing Framework PRO"
+    price: 35
+    type: digital
+  - id: lotus_cyber_module
+    name: "LOTUS Cybersecurity Module"
+    price: 20
+    type: course
