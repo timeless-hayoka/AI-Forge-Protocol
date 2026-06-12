@@ -17,12 +17,13 @@ DOMAIN = "https://phidrift.com"
 # A mapping from Stripe Price IDs to DRIFT Product/Tier IDs
 # Run `setup_stripe_products.py` to generate the real Price IDs and paste them here.
 STRIPE_PRICE_MAP = {
-    "price_1ThMDGJ300BL6srDCmfTCB7f": "drift_whitepaper",
-    "price_1ThMDGJ300BL6srDQsMqGcJv": "cognitive_loop_guide",
-    "price_1ThMDHJ300BL6srDvBllde9i": "forge_starter_kit",
-    "price_1ThMDHJ300BL6srDCQSURMy6": "lotus_cyber_module",
-    "price_1ThMDHJ300BL6srDmA9Vyv5o": "forge_operator",
-    "price_1ThMDIJ300BL6srDMgCeDSYw": "inner_circle",
+    "price_1ThMjNJ300BL6srDYZMOsXwj": "drift_whitepaper",
+    "price_1ThMjOJ300BL6srDtFml0KX7": "cognitive_loop_guide",
+    "price_1ThMjOJ300BL6srDUv18glAl": "forge_starter_kit",
+    "price_1ThMjOJ300BL6srDieqx1huv": "lotus_cyber_module",
+    "price_1ThMjPJ300BL6srDb77QGfoS": "mouse_bug_bot",
+    "price_1ThMjPJ300BL6srDQwq9IoAz": "forge_operator",
+    "price_1ThMjPJ300BL6srDYi0xvTkn": "inner_circle",
 }
 
 @app.route("/webhook", methods=["POST"])

@@ -30,6 +30,12 @@ PRODUCTS_TO_CREATE = [
         "price_usd": 20
     },
     {
+        "id": "mouse_bug_bot",
+        "name": "MOUSE: The On-The-Go Bug Bot",
+        "description": "Autonomous bug hunter and UI tester with cognitive reasoning.",
+        "price_usd": 10
+    },
+    {
         "id": "forge_operator",
         "name": "Forge Operator Tier",
         "description": "Unlock advanced tools, guides, and the whitepaper.",

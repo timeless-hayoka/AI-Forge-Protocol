@@ -7,8 +7,7 @@ from datetime import datetime
 REPOS = {
     "AI_Forge_Protocol": "/home/crexs/ai_forge_protocol",
     "INFJ_Bot": "/home/crexs/infj_bot",
-    "Lotus_Academy": "/home/crexs/lotus-academy",
-    "My_Site": "/home/crexs/my-site"
+    "Lotus_Academy": "/home/crexs/lotus-academy"
 }
 
 class Colors:
