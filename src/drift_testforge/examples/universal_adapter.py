@@ -6,7 +6,6 @@ Connects to any OpenAI-compatible API or Local Ollama.
 
 from typing import Dict, Any, Optional
 import requests
-import json
 import logging
 
 logger = logging.getLogger("TestForge.UniversalAdapter")

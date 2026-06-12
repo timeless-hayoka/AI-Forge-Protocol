@@ -11,9 +11,9 @@ import logging
 import random
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Dict, List
 
 import numpy as np
 
@@ -179,7 +179,6 @@ class TestForge:
         }
 
     def generate_reports(self, results: Dict, scorecard: Dict):
-        import pandas as pd
         import matplotlib.pyplot as plt
         
         # JSONL export (standard for papers/CI)

@@ -8,7 +8,6 @@ These are the "secret weapon" — we don't just test outputs, we test how the li
 from contextlib import contextmanager
 from typing import Dict, Any, Callable
 import logging
-import random
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +36,7 @@ def apply_perturbation(condition_name: str, system: Any = None, strength: float 
                 original_state = getattr(system.memory, "state", None)
                 # e.g. system.memory.inject_noise(strength)
         elif condition_name == "homeostasis_imbalance":
-            logger.info(f"[Perturb] Forcing homeostasis imbalance (e.g. high anxiety/safety need)")
+            logger.info("[Perturb] Forcing homeostasis imbalance (e.g. high anxiety/safety need)")
             # Real: push specific needs to extreme values in Homeostasis module
         elif condition_name == "disable_reflection":
             logger.info("[Perturb] Disabling reflection/integration cycles in CognitiveOrchestrator")

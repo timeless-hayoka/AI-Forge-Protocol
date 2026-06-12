@@ -9,9 +9,9 @@ Falls back gracefully and is fully reproducible with seeds.
 import logging
 import numpy as np
 from scipy.cluster.hierarchy import linkage, fcluster
-from scipy.spatial.distance import pdist, squareform
+from scipy.spatial.distance import pdist
 import statistics
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple
 from collections import defaultdict
 
 logger = logging.getLogger(__name__)

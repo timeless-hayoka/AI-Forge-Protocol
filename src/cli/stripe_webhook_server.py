@@ -1,7 +1,7 @@
 import os
 import stripe
 from flask import Flask, request, jsonify
-from drift_entitlement import handle_purchase, TIER_ACCESS
+from drift_entitlement import handle_purchase
 
 # Initialize Flask App
 app = Flask(__name__)
@@ -36,11 +36,11 @@ def stripe_webhook():
         event = stripe.Webhook.construct_event(
             payload, sig_header, STRIPE_WEBHOOK_SECRET
         )
-    except ValueError as e:
+    except ValueError:
         # Invalid payload
         print("⚠️ [WEBHOOK ERROR] Invalid payload.")
         return jsonify({"error": "Invalid payload"}), 400
-    except stripe.error.SignatureVerificationError as e:
+    except stripe.error.SignatureVerificationError:
         # Invalid signature
         print("⚠️ [WEBHOOK ERROR] Invalid Stripe signature.")
         return jsonify({"error": "Invalid signature"}), 400

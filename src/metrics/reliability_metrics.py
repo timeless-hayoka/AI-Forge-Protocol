@@ -5,7 +5,7 @@ Advanced metrics for cognitive reliability and causal emergence.
 
 import re
 import statistics
-from typing import List, Dict
+from typing import List
 
 class AFPReliabilityMetrics:
     

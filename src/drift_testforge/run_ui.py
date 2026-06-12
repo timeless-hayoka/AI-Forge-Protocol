@@ -31,7 +31,7 @@ def main():
     try:
         webbrowser.open(f"file://{abs_path}")
         print("\n✅ Dashboard opened in your default browser.")
-    except Exception as e:
+    except Exception:
         print(f"\nOpen manually in browser:\nfile://{abs_path}")
 
 if __name__ == "__main__":

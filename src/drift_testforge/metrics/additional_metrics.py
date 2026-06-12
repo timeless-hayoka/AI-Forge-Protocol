@@ -5,7 +5,7 @@ Behavioral consistency, homeostatic stability, reflection depth, causal impact (
 """
 
 import numpy as np
-from typing import List, Dict, Any
+from typing import List, Dict
 import statistics
 
 class AdditionalMetrics:
