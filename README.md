@@ -23,6 +23,15 @@ python forge_harness.py
 
 - `scripts/run.sh` runs the main harness
 - `scripts/verification_check.sh` checks docs for empty placeholders before release
+- `scripts/forge_v5_gatekeeper.py` — shared Forge V5 syntax gate (Python, JS, Bash, Solidity, etc.)
+
+Import in Python:
+
+```python
+from forge_v5_gatekeeper import ForgeValidator
+```
+
+Set `AFP_ROOT` to this repo if consumed from a sibling project (e.g. infj-bot).
 
 ## Related docs
 

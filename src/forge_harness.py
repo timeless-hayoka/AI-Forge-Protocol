@@ -10,11 +10,17 @@ import copy
 import logging
 import statistics
 import time
+import os
 import sys
 from pathlib import Path
 
-# Ensure infj_bot is discoverable
-sys.path.append(str(Path("/home/crexs")))
+# Ensure infj_bot / drift package is discoverable (set DRIFT_ROOT or install editable)
+_drift_root = os.environ.get("DRIFT_ROOT", os.environ.get("INFJ_BOT_ROOT", str(Path(__file__).resolve().parents[2])))
+if _drift_root and _drift_root not in sys.path:
+    sys.path.insert(0, _drift_root)
+_infj_pkg = Path(_drift_root) / "infj_bot"
+if _infj_pkg.is_dir() and str(_infj_pkg) not in sys.path:
+    sys.path.insert(0, str(_infj_pkg))
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
