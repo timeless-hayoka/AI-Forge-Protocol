@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 # Add project roots to sys.path
-# This script is located at: /home/crexs/ai_forge_protocol/drift_testforge/examples/drift_adapter.py
+# This example adapter lives under AI-Forge-Protocol/src/drift_testforge/examples/
 # Root of repo is /home/crexs/
 root_path = Path(__file__).resolve().parent.parent.parent.parent
 if str(root_path) not in sys.path:

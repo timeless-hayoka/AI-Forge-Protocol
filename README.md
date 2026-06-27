@@ -3,6 +3,8 @@
 Most AI code assistants can draft something that looks right.
 The Forge is built for the part where that code has to survive contact with reality.
 
+**Portfolio architecture:** [timeless-hayoka/ARCHITECTURE.md](https://github.com/timeless-hayoka/timeless-hayoka/blob/main/ARCHITECTURE.md) — AI-Forge-Protocol owns forge validation, the V5 gatekeeper, and pipeline utilities. Canonical local path: `/home/crexs/AI-Forge-Protocol`.
+
 AI Forge Protocol is a validation and patch-gating workflow for AI-assisted code changes. It wraps generated output in a reproducible harness, runs checks, and separates "looks plausible" from "actually safe to ship."
 
 ## What it does

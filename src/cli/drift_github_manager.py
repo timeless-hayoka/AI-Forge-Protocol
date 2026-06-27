@@ -5,9 +5,9 @@ from datetime import datetime
 
 # Define the paths to all your active DRIFT/Forge repositories
 REPOS = {
-    "AI_Forge_Protocol": "/home/crexs/ai_forge_protocol",
-    "INFJ_Bot": "/home/crexs/infj_bot",
-    "Lotus_Academy": "/home/crexs/lotus-academy"
+    "AI_Forge_Protocol": os.environ.get("AFP_ROOT", "/home/crexs/AI-Forge-Protocol"),
+    "INFJ_Bot": os.environ.get("DRIFT_ROOT", os.environ.get("INFJ_BOT_ROOT", "/home/crexs/infj_bot")),
+    "Lotus_Academy": os.environ.get("LOTUS_ACADEMY_ROOT", "/home/crexs/LOTUS-ACADEMY"),
 }
 
 class Colors:
